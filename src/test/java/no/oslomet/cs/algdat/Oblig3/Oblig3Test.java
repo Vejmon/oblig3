@@ -187,6 +187,7 @@ public class Oblig3Test {
     }  // slutt på Oppgave 4
 /*
 
+
     // OPPGAVE 5 ////////////////////////////////////////////////
     @org.junit.jupiter.api.Test
     void oppgave5() {

@@ -19,6 +19,6 @@ før den hadde sjekket den siste den var på og inkrementert antallet hvis verdi
 I opg3 så måtte jeg finne frem pen og papir igjen og tegne treet som jeg ble laget, leggInn funksjonen gjør som den skal,
 men førstePostorden og nestePostorden roter det til enn så lenge. Var bare en bagatell, rekursjerte med p sitt høyrebarn og ikke p sin høyre nabo...
 
-i opg4, så tok det litt tid til jeg skjønte hva oppgaven egentlig ba om, etter jeg forstod det var det en smal sak å implementere en løsning. Klarte å lage evig loop når man kommer tilbake til rot, så er førstePostorder tilbake igjen til en ny node, så det ble kanskje litt mange ifsetninger for basistilfellene mine.
+i opg4, så tok det litt tid til jeg skjønte hva oppgaven egentlig ba om, etter jeg forstod det var det en smal sak å implementere en løsning. Klarte å lage evig loop når man kommer tilbake til rot, da går nemlig førstePostorder tilbake igjen til en ny node. Så det ble kanskje litt mange ifsetninger for basistilfellene mine.
 
 warnings når jeg comitter er at intellij klager på ÆØÅ bruken vår.

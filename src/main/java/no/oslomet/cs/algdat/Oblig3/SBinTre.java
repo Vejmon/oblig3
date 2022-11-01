@@ -87,7 +87,7 @@ public class SBinTre<T> {
         //inspirert av programkode 5.2.3.a i
 
         if(antall() ==0){
-            rot = new Node<T>(verdi,null,null,null);
+            rot = new Node<>(verdi,null,null,null);
             antall++;
             return true;
         }
@@ -109,7 +109,10 @@ public class SBinTre<T> {
         aktivNode = new Node<>(verdi,null,null,forrige);
 
         if (verdi_større_aktiv < 0) forrige.venstre = aktivNode;
-        else forrige.høyre = aktivNode;
+        else {
+            assert forrige != null;
+            forrige.høyre = aktivNode;
+        }
 
         antall++;
         return true;
@@ -133,10 +136,10 @@ public class SBinTre<T> {
         if (!inneholder(verdi)) return 0;
 
         Node<T> aktiv = rot, forrige = rot;
-        int like = 0, mindreEnnAktiv = 0;
+        int like = 0;
 
         while (aktiv != null) {
-            mindreEnnAktiv = comp.compare(verdi, aktiv.verdi);
+            int mindreEnnAktiv = comp.compare(verdi, aktiv.verdi);
             if (mindreEnnAktiv >= 0){
                 if (mindreEnnAktiv ==0) like++;
                 aktiv = aktiv.høyre;
@@ -165,6 +168,14 @@ public class SBinTre<T> {
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
+        /*tatt fra læreboka
+         Postorden:
+            Hvis p ikke har en forelder (p er rotnoden), så er p den siste i postorden.
+            Hvis p er høyre barn til sin forelder f, er forelderen f den neste.
+            Hvis p er venstre barn til sin forelder f, gjelder:
+                Hvis p er enebarn (f.høyre er null), er forelderen f den neste.
+                Hvis p ikke er enebarn (dvs. f.høyre er ikke null), så er den neste den noden som kommer først i postorden i subtreet med f.høyre som rot.
+        */
         //hvis p er roten
         if (p.forelder == null) return null;
 
@@ -175,13 +186,17 @@ public class SBinTre<T> {
         else {
             //hvis p er enebarn
             if (p.forelder.høyre == null) return p.forelder;
-            //hvis høyre Node
+            //hvis høyre Node finnes
             else return førstePostorden(p.forelder.høyre);
         }
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> aktiv = førstePostorden(rot);
+        while (aktiv!= null) {
+            oppgave.utførOppgave(aktiv.verdi);
+            aktiv = nestePostorden(aktiv);
+        }
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) {
@@ -189,7 +204,16 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (p.equals(rot))  p = førstePostorden(p);
+        else p = nestePostorden(p);
+
+        Objects.requireNonNull(p, "forsøkt å rekursere med null node");
+        if (p.equals(rot)){
+            oppgave.utførOppgave(p.verdi);
+            return;
+        }
+        oppgave.utførOppgave(p.verdi);
+        postordenRecursive(p, oppgave);
     }
 
     public ArrayList<T> serialize() {

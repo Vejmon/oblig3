@@ -3,6 +3,7 @@ package no.oslomet.cs.algdat.Oblig3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class SBinTre<T> {
@@ -83,7 +84,36 @@ public class SBinTre<T> {
     }
 
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Objects.requireNonNull(verdi, "nullverdi forsøkt i leggInn");
+        //inspirert av programkode 5.2.3.a i
+
+        if(antall() ==0){
+            rot = new Node<T>(verdi,null,null,null);
+            antall++;
+            return true;
+        }
+        Node<T> aktivNode = rot;
+        Node<T> forrige = rot;
+        int verdiMinLikForelder = 0;
+
+        while (aktivNode != null){
+            verdiMinLikForelder = comp.compare(verdi, aktivNode.verdi);
+            if (verdiMinLikForelder <= 0){
+                forrige = aktivNode;
+                aktivNode = aktivNode.venstre;
+            }
+            else {
+                forrige = aktivNode;
+                aktivNode = aktivNode.høyre;
+            }
+        }
+        aktivNode = new Node<>(verdi,null,null,forrige);
+
+        if (verdiMinLikForelder <= 0) forrige.venstre = aktivNode;
+        else forrige.høyre = aktivNode;
+
+        antall++;
+        return true;
     }
 
     public boolean fjern(T verdi) {
@@ -130,5 +160,12 @@ public class SBinTre<T> {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
+
+    public static void main(String[] args){
+        Integer[] a = {4,7,2,9,5,10,8,1,3,6,4,5,90};
+        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) {tre.leggInn(verdi); }
+        System.out.println(tre.antall()); // Utskrift: 10
+    }
 
 } // ObligSBinTre

@@ -94,11 +94,11 @@ public class SBinTre<T> {
         }
         Node<T> aktivNode = rot;
         Node<T> forrige = rot;
-        int verdiMinLikForelder = 0;
+        int verdi_større_aktiv = 0;
 
         while (aktivNode != null){
-            verdiMinLikForelder = comp.compare(verdi, aktivNode.verdi);
-            if (verdiMinLikForelder < 0){
+            verdi_større_aktiv = comp.compare(verdi, aktivNode.verdi);
+            if (verdi_større_aktiv < 0){
                 forrige = aktivNode;
                 aktivNode = aktivNode.venstre;
             }
@@ -109,7 +109,7 @@ public class SBinTre<T> {
         }
         aktivNode = new Node<>(verdi,null,null,forrige);
 
-        if (verdiMinLikForelder < 0) forrige.venstre = aktivNode;
+        if (verdi_større_aktiv < 0) forrige.venstre = aktivNode;
         else forrige.høyre = aktivNode;
 
         antall++;
@@ -125,8 +125,25 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
+        // null er ikke i listen.
+        if (verdi == null){
+            return 0;
+        }
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> aktiv = rot, forrige = rot;
+        int like = 0, mindreEnnAktiv = 0;
+
+        while (aktiv != null) {
+            mindreEnnAktiv = comp.compare(verdi, aktiv.verdi);
+            if (mindreEnnAktiv >= 0){
+                if (mindreEnnAktiv ==0) like++;
+                aktiv = aktiv.høyre;
+            }
+            else {
+                aktiv = aktiv.venstre;
+            }
+        }
+        return like;
     }
 
     public void nullstill() {
@@ -134,7 +151,12 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> ut = p;
+        while (p != null){
+            ut = p;
+            p = p.venstre;
+        }
+        return ut;
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
@@ -163,7 +185,7 @@ public class SBinTre<T> {
 
 
     public static void main(String[] args){
-        Integer[] a = {4,7,2,9,4,10,8,7,4,6};
+        Integer[] a = {4,7,5,2,9,4,5,10,5,8,7,4,6,5,6,5};
         SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) { tre.leggInn(verdi); }
         System.out.println(tre.antall()); // Utskrift: 10

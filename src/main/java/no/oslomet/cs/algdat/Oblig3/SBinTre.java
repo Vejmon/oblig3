@@ -98,7 +98,7 @@ public class SBinTre<T> {
 
         while (aktivNode != null){
             verdiMinLikForelder = comp.compare(verdi, aktivNode.verdi);
-            if (verdiMinLikForelder <= 0){
+            if (verdiMinLikForelder < 0){
                 forrige = aktivNode;
                 aktivNode = aktivNode.venstre;
             }
@@ -109,7 +109,7 @@ public class SBinTre<T> {
         }
         aktivNode = new Node<>(verdi,null,null,forrige);
 
-        if (verdiMinLikForelder <= 0) forrige.venstre = aktivNode;
+        if (verdiMinLikForelder < 0) forrige.venstre = aktivNode;
         else forrige.høyre = aktivNode;
 
         antall++;

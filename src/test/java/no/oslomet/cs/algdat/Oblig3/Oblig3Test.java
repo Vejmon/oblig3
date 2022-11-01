@@ -185,7 +185,7 @@ public class Oblig3Test {
         tre.postordenRecursive(oppgave);
         assertEquals(postorden.get(), " 2 4 5 3 1 7 9 8 6 11 13 12 14 10");
     }  // slutt på Oppgave 4
-
+/*
 
     // OPPGAVE 5 ////////////////////////////////////////////////
     @org.junit.jupiter.api.Test
@@ -394,5 +394,6 @@ public class Oblig3Test {
         assertEquals(antallFeil, 0);
     }  // slutt på Oppgave 5
 
+    */
 
 } // Oblig3Test

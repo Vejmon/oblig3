@@ -16,4 +16,5 @@ I oppgave 2 så brukte jeg en tegneblogg til å visualisere problemet mitt, og s
 jeg måtte gå tilbake til legginn metoden og få ordnings på den først. Så la jeg inn spesialltilfelle for null verdi, og fikset loopen min, da den hoppet ut av løkka
 før den hadde sjekket den siste den var på og inkrementert antallet hvis verdien var lik nodens verdi.
 
-I opg3 
+I opg3 så måtte jeg finne frem pen og papir igjen og tegne treet som jeg ble laget, leggInn funksjonen gjør som den skal,
+men førstePostorden og nestePostorden roter det til enn så lenge. Var bare en bagatell, rekursjerte med p sitt høyrebarn og ikke p sin høyre nabo...

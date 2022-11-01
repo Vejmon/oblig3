@@ -75,7 +75,6 @@ public class SBinTre<T> {
             s.add(p.verdi.toString());
             p = nestePostorden(p);
         }
-
         return s.toString();
     }
 
@@ -130,6 +129,9 @@ public class SBinTre<T> {
             return 0;
         }
 
+        //sjekker fort om det finnes en i det hele tatt
+        if (!inneholder(verdi)) return 0;
+
         Node<T> aktiv = rot, forrige = rot;
         int like = 0, mindreEnnAktiv = 0;
 
@@ -151,16 +153,31 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
+
         Node<T> ut = p;
         while (p != null){
             ut = p;
-            p = p.venstre;
+            if (p.venstre != null) p = p.venstre;
+            else p = p.høyre;
         }
         return ut;
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        //hvis p er roten
+        if (p.forelder == null) return null;
+
+        //hvis p er høyre barn
+        else if (p.equals(p.forelder.høyre)) return p.forelder;
+
+        //hvis p er venstre barn
+        else {
+            //hvis p er enebarn
+            if (p.forelder.høyre == null) return p.forelder;
+            //hvis høyre Node
+            else return førstePostorden(p.forelder.høyre);
+        }
     }
 
     public void postorden(Oppgave<? super T> oppgave) {

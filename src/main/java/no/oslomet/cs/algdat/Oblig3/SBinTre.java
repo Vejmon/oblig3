@@ -215,18 +215,6 @@ public class SBinTre<T> {
         postordenRecursive(p, oppgave);
     }
 
-    /*private static <T> int treHøyde(Node<T> p){
-
-        if (p == null) return 0;
-        else {
-            int vHøyde = treHøyde(p.venstre);
-            int hHøyde = treHøyde(p.høyre);
-
-            if (vHøyde > hHøyde) return (vHøyde + 1);
-            else return (hHøyde + 1);
-        }
-    }*/
-
     public ArrayList<T> serialize() {
 
         if (rot == null) return new ArrayList<>();
@@ -251,47 +239,6 @@ public class SBinTre<T> {
             mitt.leggInn(del);
         }
         return mitt;
-    }
-
-    public static void main(String[] args){
-        /*Integer[] a = {4,7,5,2,9,4,5,10,5,8,7,4,6,5,6,5};
-        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
-        for (int verdi : a) { tre.leggInn(verdi); }
-
-        char[] m ="IJKOPABCDELMNFGH".toCharArray();
-        ArrayList<Character> b = new ArrayList<>();
-        for (char del: m) {b.add(del);}
-        SBinTre<Character> bokstavTre = new SBinTre<>(Comparator.naturalOrder());
-        for (char del: b) {bokstavTre.leggInn(del);}
-
-        b = bokstavTre.serialize();
-        a = tre.serialize().toArray(new Integer[0]);*/
-        //Lag et nytt binærtre
-        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
-        int[] a = {10, 14, 6, 8, 1, 12, 7, 3, 11, 9, 13, 5, 2, 4};
-        for (int verdi : a) { tre.leggInn(verdi); }
-
-        int[] c = {10, 6, 14, 1, 8, 12, 3, 7, 9, 11, 13, 2, 5, 4};
-        //Gjør om treet til et array
-        ArrayList<Integer> data = tre.serialize();
-
-        System.out.println(data);
-        System.out.println(Arrays.toString(c));
-
-
-
-
-
-
-
-
-
-
-/*
-        ArrayList<Integer> data = tre.serialize();
-        System.out.println(data.toString());
-*/
-
     }
 
 } // ObligSBinTre

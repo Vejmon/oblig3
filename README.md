@@ -21,7 +21,7 @@ men førstePostorden og nestePostorden roter det til enn så lenge. Var bare en 
 
 i opg4, så tok det litt tid til jeg skjønte hva oppgaven egentlig ba om, etter jeg forstod det var det en smal sak å implementere en løsning. Klarte å lage evig loop når man kommer tilbake til rot, da går nemlig førstePostorder tilbake igjen til en ny node. Så det ble kanskje litt mange ifsetninger for basistilfellene mine.
 
-opg5: jeg prøvde å finne en løsning selv ved å finne høyden til treet mitt og så ta for meg node for node etter hvordan de ligger i høyde og mot venstre men endte opp med å kjøre meg fast. leste oppgavebeksrivelsen på nytt og prøver nå å løse den med en FIFO kø. Syns jeg har litt tendens til å overtenke når jeg ikke skjønner noe, så en guide og ha løst oppgave 5. kunne brukt forelder-pekeren til nodene mine men lagde heller en kø slik som det stod i oppgaven
+opg5: jeg prøvde å finne en løsning selv ved å finne høyden til treet mitt og så ta for meg node for node etter hvordan de ligger i høyde og mot venstre men endte opp med å kjøre meg fast. leste oppgavebeksrivelsen på nytt og prøver nå å løse den med en FIFO kø. Syns jeg har litt tendens til å overtenke når jeg ikke skjønner noe, så en guide og ha løst oppgave 5. kunne brukt forelder-pekeren til nodene mine men lagde heller en kø slik som det stod i oppgaven. Det løste også litt opp når jeg bestemte meg for å tegne treet, da så jeg logikken i hvordan nodene skulle komme ut, som bedt om i testene.
 
 
 

@@ -185,7 +185,7 @@ public class Oblig3Test {
         tre.postordenRecursive(oppgave);
         assertEquals(postorden.get(), " 2 4 5 3 1 7 9 8 6 11 13 12 14 10");
     }  // slutt på Oppgave 4
-/*
+
 
     // OPPGAVE 5 ////////////////////////////////////////////////
     @org.junit.jupiter.api.Test
@@ -205,6 +205,7 @@ public class Oblig3Test {
         assertEquals(tre.toStringPostOrder(), tre2.toStringPostOrder());
     } // slutt på Oppgave 5
 
+/*
 
     // OPPGAVE 6 ////////////////////////////////////////////////
     @org.junit.jupiter.api.Test
@@ -392,8 +393,8 @@ public class Oblig3Test {
             System.out.println("pekere i treet skal nulles!");
         }
         assertEquals(antallFeil, 0);
-    }  // slutt på Oppgave 5
+    }  // slutt på Oppgave 6
 
-    */
+*/
 
 } // Oblig3Test

@@ -1,10 +1,8 @@
 package no.oslomet.cs.algdat.Oblig3;
 
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.awt.event.ItemListener;
+import java.util.*;
 
 public class SBinTre<T> {
     private static final class Node<T>   // en indre nodeklasse
@@ -57,6 +55,7 @@ public class SBinTre<T> {
             else if (cmp > 0) p = p.høyre;
             else return true;
         }
+
 
         return false;
     }
@@ -216,24 +215,83 @@ public class SBinTre<T> {
         postordenRecursive(p, oppgave);
     }
 
+    /*private static <T> int treHøyde(Node<T> p){
+
+        if (p == null) return 0;
+        else {
+            int vHøyde = treHøyde(p.venstre);
+            int hHøyde = treHøyde(p.høyre);
+
+            if (vHøyde > hHøyde) return (vHøyde + 1);
+            else return (hHøyde + 1);
+        }
+    }*/
+
     public ArrayList<T> serialize() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        if (rot == null) return new ArrayList<>();
+
+        LinkedList<Node<T>> holder = new LinkedList<>();
+        holder.add(rot);
+        ArrayList<T> utList = new ArrayList<>();
+
+        while (holder.size()> 0){
+            Node<T> aktivNode = holder.remove();
+            if (aktivNode.venstre != null) holder.add(aktivNode.venstre);
+            if (aktivNode.høyre != null) holder.add(aktivNode.høyre);
+            utList.add(aktivNode.verdi);
+        }
+        return utList;
     }
 
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        SBinTre<K> mitt = new SBinTre<K>(c);
+        for (K del:data) {
+            mitt.leggInn(del);
+        }
+        return mitt;
     }
 
-
     public static void main(String[] args){
-        Integer[] a = {4,7,5,2,9,4,5,10,5,8,7,4,6,5,6,5};
+        /*Integer[] a = {4,7,5,2,9,4,5,10,5,8,7,4,6,5,6,5};
         SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) { tre.leggInn(verdi); }
-        System.out.println(tre.antall()); // Utskrift: 10
-        System.out.println(tre.antall(5)); // Utskrift: 0
-        System.out.println(tre.antall(4)); // Utskrift: 3
-        System.out.println(tre.antall(7)); // Utskrift: 2
-        System.out.println(tre.antall(10)); // Utskrift: 1
+
+        char[] m ="IJKOPABCDELMNFGH".toCharArray();
+        ArrayList<Character> b = new ArrayList<>();
+        for (char del: m) {b.add(del);}
+        SBinTre<Character> bokstavTre = new SBinTre<>(Comparator.naturalOrder());
+        for (char del: b) {bokstavTre.leggInn(del);}
+
+        b = bokstavTre.serialize();
+        a = tre.serialize().toArray(new Integer[0]);*/
+        //Lag et nytt binærtre
+        SBinTre<Integer> tre = new SBinTre<>(Comparator.naturalOrder());
+        int[] a = {10, 14, 6, 8, 1, 12, 7, 3, 11, 9, 13, 5, 2, 4};
+        for (int verdi : a) { tre.leggInn(verdi); }
+
+        int[] c = {10, 6, 14, 1, 8, 12, 3, 7, 9, 11, 13, 2, 5, 4};
+        //Gjør om treet til et array
+        ArrayList<Integer> data = tre.serialize();
+
+        System.out.println(data);
+        System.out.println(Arrays.toString(c));
+
+
+
+
+
+
+
+
+
+
+/*
+        ArrayList<Integer> data = tre.serialize();
+        System.out.println(data.toString());
+*/
+
     }
 
 } // ObligSBinTre
